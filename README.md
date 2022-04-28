@@ -4,7 +4,7 @@
 ## Installation
 
 ```bash
-  git clone https://github.com/ASACHIT/OCR-django-app.git
+  git clone https://github.com/ScopeGlobal/Minor-Project-Sem-VI
   cd OCR-django-app
   pip install -r requirements
   python manage.py runserver 
