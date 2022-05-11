@@ -1,0 +1,172 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="stylesheet" href="/static/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/index.min.css"
+    />
+    <!-- CSS for Header -->
+    <link
+      href="http://fonts.cdnfonts.com/css/euclid-circular-a?styles=100037,100034,100036,100039,100031"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+
+  <body
+    class="bg-slate-50"
+    style="font-family: 'Euclid Circular A', sans-serif"
+  >
+    <header class="text-gray-600 body-font">
+      <div
+        class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center"
+      >
+        <a
+          class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0"
+        >
+          <span class="ml-3 text-xl">OCR <i class="fi fi-rr-text"></i></span>
+        </a>
+        <nav
+          class="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center"
+        >
+          <a href="/" class="mr-5 cursor-pointer hover:text-gray-900"
+            ><i class="fi fi-rr-home"></i> Home</a
+          >
+          <a
+            href="https://www.facebook.com/sachhit.yadav"
+            target="_blank"
+            class="mr-5 cursor-pointer hover:text-gray-900"
+            ><i class="fi fi-rr-user"></i> Creator</a
+          >
+        </nav>
+        <a href="{% url 'register'%}" target="">
+          <button
+            class="inline-flex items-center py-1 px-3 rounded text-base mt-4 md:mt-0 bg-gray-100 duration-300 hover:shadow-lg"
+          >
+            Let's get started
+            <svg
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              class="w-4 h-4 ml-1"
+              viewBox="0 0 24 24"
+            >
+              <path d="M5 12h14M12 5l7 7-7 7"></path>
+            </svg>
+          </button>
+        </a>
+      </div>
+    </header>
+    <section class="h-screen">
+      <div class="px-6 h-full text-gray-800">
+        <div
+          class="flex xl:justify-center lg:justify-between justify-center items-center flex-wrap h-full g-6"
+        >
+          <div
+            class="grow-0 shrink-1 md:shrink-0 basis-auto xl:w-6/12 lg:w-6/12 md:w-9/12 mb-12 md:mb-0"
+          >
+            <img
+              src="{% static 'assets/images/sg2.svg'%}"
+              class="w-4/5"
+              alt="Sample image"
+            />
+          </div>
+          <div class="xl:ml-20 xl:w-5/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0">
+            <h2 class="sm:text-5xl text-2xl font-medium mb-20 text-gray-900">
+              LOGIN
+            </h2>
+            <form method="POST">
+              {% csrf_token %}
+              <div
+                class="flex flex-row items-center justify-center lg:justify-start"
+              >
+                <p class="text-lg mb-0 mr-4">Sign in with</p>
+                <button type="button" class="custom-btn shadow-md mb-2">
+                  <i class="fab fa-google"></i>
+                </button>
+              </div>
+
+              <div
+                class="flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5"
+              >
+                <p class="text-center font-semibold mx-4 mb-0">Or</p>
+              </div>
+
+              <!-- Email input -->
+              <div class="mb-6">{{ form.email }}</div>
+
+              <!-- Password input -->
+              <div class="mb-6">{{ form.password }}</div>
+
+              <div>
+                {% if msg %}
+                <p><b>{{ msg | safe }}</b></p>
+                {% endif %}
+              </div>
+              <div class="flex justify-between items-center mb-6">
+                <div class="form-group form-check">
+                  <input
+                    type="checkbox"
+                    class="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
+                    id="exampleCheck2"
+                  />
+
+                  <label
+                    class="form-check-label inline-block text-gray-800"
+                    for="exampleCheck2"
+                    >Remember me</label
+                  >
+                </div>
+                <a href="#!" class="text-gray-800">Forgot password?</a>
+              </div>
+
+              <div class="text-center lg:text-left">
+                <button type="submit" class="custom-btn shadow-md mb-2">
+                  Login
+                </button>
+                <p class="text-sm font-semibold mt-2 pt-1 mb-0">
+                  Don't have an account?
+                  <a
+                    href="{% url 'register' %}"
+                    class="text-red-600 hover:text-red-700 focus:text-red-700 transition duration-200 ease-in-out"
+                    >Register</a
+                  >
+                </p>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
+  </body>
+</html>
