@@ -52,13 +52,24 @@
             class="mr-5 cursor-pointer hover:text-gray-900"
             ><i class="fi fi-rr-home"></i> Home</a
           >
+          {% if user.username%}
           <a
             href="{% url 'dashboard'%}"
             target=""
             class="mr-5 cursor-pointer hover:text-gray-900"
-            ><i class="fi fi-rr-user"></i>Account</a
+            ><i class="mr-1 fi fi-rr-user"></i>Account</a
           >
+          {% endif %}
         </nav>
+        {% if user.username%}
+        <a href="{% url 'logout'%}" target="">
+          <button
+            class="inline-flex items-center py-1 px-3 rounded text-base mt-4 md:mt-0 bg-gray-100 duration-300 hover:shadow-lg hover:bg-gray-800 hover:text-white"
+          >
+            <i class="mr-1 fi-rr-angle-square-left"></i> Logout
+          </button>
+        </a>
+        {% else %}
         <a href="{% url 'login'%}" target="">
           <button
             class="inline-flex items-center py-1 px-3 rounded text-base mt-4 md:mt-0 bg-gray-100 duration-300 hover:shadow-lg"
@@ -77,6 +88,7 @@
             </svg>
           </button>
         </a>
+        {% endif %}
       </div>
     </header>
     {% block main-content %} {% endblock main-content %}

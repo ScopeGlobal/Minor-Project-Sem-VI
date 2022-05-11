@@ -1,4 +1,5 @@
 import base64
+from urllib import request
 
 import numpy as np
 import pytesseract
@@ -18,7 +19,11 @@ pytesseract.pytesseract.tesseract_cmd = (
     r"C:\Program Files\Tesseract-OCR\tesseract.exe"  # Path to tesseract.exe
 )
 
-
+def basepage(request, username=None):
+    if User.objects.get(username=username):
+        user = User.objects.get(username=username)
+        return render(request,"base.html",{"user":user})
+        
 def homepage(request):
     if request.method == "POST":
         try:
@@ -99,10 +104,7 @@ def registerpage(request):
 def profile(request, username=None):
     if User.objects.get(username=username):
         user = User.objects.all()
-        firstname = User.objects.filter(firstname)
-        lastname = User.objects.filter(lastname)
-        fullname = firstname + '' + lastname
-        return render(request,"dashboard.html",{"user" : user,"fullname" : fullname})
+        return render(request,"dashboard.html",{"user" : user,})
 
 
 def logoutUser(request):

@@ -10,5 +10,5 @@ urlpatterns = [
     re_path('^login$', views.loginpage, name="login"),
     path('logout',views.logoutUser,name='logout'), 
     re_path(r'profile/(?P<username>.+)/$', views.profile, name="profile"),
-    
+    re_path(r'basepage/(?P<username>.+)/$', views.basepage, name="base"),    
 ]
