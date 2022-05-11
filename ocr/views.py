@@ -5,6 +5,7 @@ import pytesseract
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, HttpResponse, redirect
+import cv2 as cv
 from PIL import Image
 from .forms import LoginForm, RegistrationForm
 
@@ -30,7 +31,16 @@ def homepage(request):
             return render(request, "home.html")
         lang = request.POST["language"]
         img = np.array(Image.open(image))
-        text = pytesseract.image_to_string(img, lang=lang)
+
+        img = np.array(Image.open(image))
+        # cv_img = cv.imread(image)
+        # cv.imshow(cv_img)
+        gr_img = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
+        
+        norm_img = cv.normalize(gr_img, None, 0, 300, cv.NORM_MINMAX)
+        thinned = cv.ximgproc.thinning(gr_img)
+        ret, thresh_img = cv.threshold(norm_img, 120, 255, cv.THRESH_TOZERO)
+        text = pytesseract.image_to_string(norm_img, lang=lang)
         # return text to html
         return render(request, "home.html", {"ocr": text, "image": image_base64})
 
