@@ -3,10 +3,10 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import Group, User
 
 class LoginForm(forms.Form):
-    email = forms.EmailField(
-        widget=forms.EmailInput(
+    username = forms.CharField(
+        widget=forms.TextInput(
             attrs={
-                "placeholder" : "Email",                
+                "placeholder" : "Username",                
                 "class": "form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
             }
         ))
@@ -19,7 +19,14 @@ class LoginForm(forms.Form):
         ))
 
 class RegistrationForm(UserCreationForm):
-    firstname = forms.CharField(
+    username = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "placeholder" : "Username",                
+                "class": "form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+            }
+        ))
+    first_name = forms.CharField(
         widget=forms.TextInput(
             attrs={
                 "placeholder" : "First Name",                
@@ -27,7 +34,7 @@ class RegistrationForm(UserCreationForm):
 
             }
         ))
-    lastname = forms.CharField(
+    last_name = forms.CharField(
         widget=forms.TextInput(
             attrs={
                 "placeholder" : "Last Name",                
@@ -58,7 +65,7 @@ class RegistrationForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ('firstname','lastname', 'email', 'password1', 'password2')
+        fields = ('username','first_name','last_name', 'email', 'password1', 'password2')
 
 
 

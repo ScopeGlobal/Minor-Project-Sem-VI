@@ -3,6 +3,7 @@ import base64
 import numpy as np
 import pytesseract
 from django.contrib import messages
+from django.contrib.auth.models import auth
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, HttpResponse, redirect
 import cv2 as cv
@@ -46,8 +47,10 @@ def homepage(request):
 
     return render(request, "home.html")
 
+def dashboardpage(request):
+    return render(request, "dashboard.html")
 
-def login(request):
+def loginpage(request):
     form = LoginForm(request.POST or None)
 
     msg = None
@@ -55,12 +58,12 @@ def login(request):
     if request.method == "POST":
 
         if form.is_valid():
-            email = form.cleaned_data.get("email")
+            username = form.cleaned_data.get("username")
             password = form.cleaned_data.get("password")
-            user = authenticate(email=email, password=password)
+            user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect("homepage")
+                return redirect("home")
             else:    
                 msg = 'Invalid credentials'    
         else:
@@ -69,8 +72,7 @@ def login(request):
     return render(request, "login.html", {"form": form, "msg" : msg})
 
 
-
-def register(request):
+def registerpage(request):
     msg     = None
     success = False
 
@@ -78,10 +80,9 @@ def register(request):
         form = RegistrationForm(request.POST)
         if form.is_valid():
             form.save()
-            firstname = form.cleaned_data.get("firstname")
-            lastname = form.cleaned_data.get("lastname")
+            username = form.cleaned_data.get("username")
             raw_password = form.cleaned_data.get("password1")
-            user = authenticate(firstname=firstname, lastname=lastname,password=raw_password)
+            user = authenticate(username=username,password=raw_password)
 
             msg     = 'User created - please <a href="/login">login</a>.'
             success = True
@@ -94,3 +95,16 @@ def register(request):
         form = RegistrationForm()
 
     return render(request, "register.html", {"form": form, "msg" : msg, "success" : success })
+
+def profile(request, username=None):
+    if User.objects.get(username=username):
+        user = User.objects.all()
+        firstname = User.objects.filter(firstname)
+        lastname = User.objects.filter(lastname)
+        fullname = firstname + '' + lastname
+        return render(request,"dashboard.html",{"user" : user,"fullname" : fullname})
+
+
+def logoutUser(request):
+    auth.logout(request)
+    return redirect('login')

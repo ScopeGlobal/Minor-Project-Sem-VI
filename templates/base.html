@@ -23,6 +23,12 @@
       href="/static/assets/icons/TEXT.svg"
       type="image/x-icon"
     />
+    <!-- CSS for Dashboard -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.1.2/tailwind.min.css"
+    />
+    <link rel="stylesheet" href="./style.css" />
   </head>
 
   <body
@@ -41,14 +47,16 @@
         <nav
           class="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center"
         >
-          <a href="/" class="mr-5 cursor-pointer hover:text-gray-900"
+          <a
+            href="{% url 'home'%}"
+            class="mr-5 cursor-pointer hover:text-gray-900"
             ><i class="fi fi-rr-home"></i> Home</a
           >
           <a
-            href="https://www.facebook.com/sachhit.yadav"
-            target="_blank"
+            href="{% url 'dashboard'%}"
+            target=""
             class="mr-5 cursor-pointer hover:text-gray-900"
-            ><i class="fi fi-rr-user"></i> Creator</a
+            ><i class="fi fi-rr-user"></i>Account</a
           >
         </nav>
         <a href="{% url 'login'%}" target="">
@@ -87,11 +95,7 @@
       <span
         class="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start"
       >
-        <a
-          class="text-gray-500"
-          href=""
-          target="_blank"
-        >
+        <a class="text-gray-500" href="" target="_blank">
           <svg
             fill="currentColor"
             stroke-linecap="round"
@@ -105,11 +109,7 @@
             ></path>
           </svg>
         </a>
-        <a
-          class="ml-3 text-gray-500"
-          href=""
-          target="_blank"
-        >
+        <a class="ml-3 text-gray-500" href="" target="_blank">
           <svg
             fill="none"
             stroke="currentColor"
@@ -125,11 +125,7 @@
             ></path>
           </svg>
         </a>
-        <a
-          class="ml-3 text-gray-500"
-          href=""
-          target="_blank"
-        >
+        <a class="ml-3 text-gray-500" href="" target="_blank">
           <svg
             fill="currentColor"
             stroke="currentColor"

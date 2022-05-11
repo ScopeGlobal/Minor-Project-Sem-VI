@@ -64,9 +64,28 @@
           />
           <button class="custom-btn shadow-md" disabled>
             <select name="language" id="languages" class="bg-transparent">
-              <option value="eng" selected>English</option>
-              <option value="nep">Nepali</option>
-              <option value="hin">Hindi</option>
+              <option
+                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                role="menuitem"
+                value="eng"
+                selected
+              >
+                English
+              </option>
+              <option
+                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                role="menuitem"
+                value="nep"
+              >
+                Nepali
+              </option>
+              <option
+                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                role="menuitem"
+                value="hin"
+              >
+                Hindi
+              </option>
             </select>
           </button>
           <button type="submit" class="custom-btn shadow-md bg-white">
@@ -211,5 +230,4 @@
     </div>
   </div>
 </section>
-
 {% endblock main-content %}

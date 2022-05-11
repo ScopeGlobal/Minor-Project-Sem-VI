@@ -4,7 +4,11 @@ from django.urls import include, path, re_path
 from . import views
 
 urlpatterns = [
-    path("", views.homepage, name="homepage"),
-    re_path('^register$', views.register, name="register"),
-    re_path('^login$', views.login, name="login"),
+    path("", views.homepage, name="home"),
+    path("dashboard",views.dashboardpage, name="dashboard"),
+    re_path('^register$', views.registerpage, name="register"),
+    re_path('^login$', views.loginpage, name="login"),
+    path('logout',views.logoutUser,name='logout'), 
+    re_path(r'profile/(?P<username>.+)/$', views.profile, name="profile"),
+    
 ]
