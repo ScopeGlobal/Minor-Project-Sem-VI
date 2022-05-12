@@ -17,3 +17,24 @@ function uploaded() {
     console.log('uploaded');
     document.querySelector('#upload-btn').innerText = "Uploaded!";
 }
+
+// var doc = new jsPDF();
+// var specialElementHandlers = {
+//     '#editor': function (element, renderer) {
+//         return true;
+//     }
+// };
+
+// $('#exportbtn').click(function () {   
+//     doc.fromHTML($('#ocrtext').html(), 15, 15, {
+//         'width': 170,
+//             'elementHandlers': specialElementHandlers
+//     });
+//     doc.save('sample-file.pdf');
+// });
+
+function generatePDF() {
+var doc = new jsPDF();  //create jsPDF object
+doc.fromHTML(document.getElementById("ocrtext"), 15, 15,{'width': 170}, doc.save("HTML2PDF.pdf")
+);
+}
