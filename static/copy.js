@@ -34,7 +34,10 @@ function uploaded() {
 // });
 
 function generatePDF() {
+    var a = "{{ ocr }}";
+    console.log(a); 
+    console.log(document.getElementById("ocrtext"));
 var doc = new jsPDF();  //create jsPDF object
-doc.fromHTML(document.getElementById("ocrtext"), 15, 15,{'width': 170}, doc.save("HTML2PDF.pdf")
+doc.fromHTML(document.getElementById("ocrtext").innerText.toString(), 15, 15,{'width': 170}, doc.save("HTML2PDF.pdf")
 );
 }
