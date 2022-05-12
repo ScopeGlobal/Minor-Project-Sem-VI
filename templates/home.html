@@ -1,5 +1,7 @@
 {% extends 'base.html' %} {% block main-content %}
 
+{% load static %}
+
 <!-- error popup modal -->
 {% if messages %} {% for msg in messages %}
 <div
@@ -109,7 +111,7 @@
     <!-- OCR text will be shown -->
     {% if ocr %}
     <div
-      class="ease-out bg-white text-slate-800 rounded-2xl hover:shadow-lg p-6 mt-3 duration-300 w-auto"
+      class="ease-out bg-white text-slate-800 rounded-2xl hover:shadow-lg p-6 mt-3 duration-300 w-auto" id = "div_txt"
     >
       <p id="ocrtext" class="text-lg mt-2 mb-8 text-center">{{ ocr }}</p>
       <button id="copybtn" onclick="copy()" class="button">
@@ -117,10 +119,10 @@
         <i class="fi fi-rr-duplicate"></i>
       </button>
 
-      <button id="exportbtn" onclick="generatePDF" class="button">
+      <a id="exportbtn" class="button" download href="{% static '/demo.txt' %}"te>
         Export as pdf
-        <i class="fi fi-rr-duplicate"></i>
-      </button>
+        <!--    -->
+      </a>
     </div>
     {% endif %}
     <!-- OCR text will be shown -->
@@ -155,6 +157,7 @@
       }, 3000);
     </script>
     <!-- script to change svg change  -->
+    
     <div
       class="flex flex-col flex-wrap lg:py-6 -mb-10 lg:w-1/2 lg:pl-12 lg:text-left text-center"
     >

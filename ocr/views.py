@@ -1,5 +1,6 @@
 import base64
 from urllib import request
+from django.conf import settings
 
 import numpy as np
 import pytesseract
@@ -48,7 +49,13 @@ def homepage(request):
         ret, thresh_img = cv.threshold(norm_img, 120, 255, cv.THRESH_TOZERO)
         text = pytesseract.image_to_string(norm_img, lang=lang)
         # return text to html
-        return render(request, "home.html", {"ocr": text, "image": image_base64})
+        path =  "/static/"
+        print(path)
+        f = open("./static/demo.txt", "w+")
+        f.write(text)
+        f.close()
+        return render(request, "home.html", {"ocr": text, "image": image_base64, "url": "demo.txt"}) 
+
 
     return render(request, "home.html")
 
@@ -110,3 +117,5 @@ def profile(request, username=None):
 def logoutUser(request):
     auth.logout(request)
     return redirect('login')
+
+
